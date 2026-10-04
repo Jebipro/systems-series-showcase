@@ -53,28 +53,37 @@ describe('page structure', () => {
 });
 
 describe('project links', () => {
-  it('creates no fake links while URLs are unset', () => {
+  it('renders the four published CTAs as real external links', () => {
+    const expected = [
+      ['https://jebipro.github.io/mini-lang-execution-visualizer/', 'Execution Visualizer 열기'],
+      ['https://github.com/Jebipro/mini-lang', 'GitHub 저장소 보기'],
+      ['https://jebipro.github.io/mini-db-durability-visualizer/', 'Durability Visualizer 열기'],
+      ['https://github.com/Jebipro/mini-db', 'GitHub 저장소 보기'],
+    ] as const;
+    const external = [...html.matchAll(/<a [^>]*href="(https:[^"]+)"[^>]*>([^<]*)/g)];
+    expect(external.map(([, href]) => href)).toEqual(expected.map(([href]) => href));
+    for (const [tag, , text] of external) {
+      expect(tag).toContain('target="_blank"');
+      expect(tag).toContain('rel="noopener noreferrer"');
+      expect(expected.some(([, label]) => text?.startsWith(label))).toBe(true);
+    }
+    expect(html).not.toContain('배포 준비 완료');
+    expect(html).not.toContain('아직 공개 전');
+  });
+
+  it('creates no fake links, and every in-page anchor has a target', () => {
     expect(html).not.toMatch(/href="#"/);
-    expect(html).not.toContain('Execution Visualizer 열기');
-    expect(html).not.toContain('Durability Visualizer 열기');
-    expect(html).toContain('인터랙티브 데모, 배포 준비 완료');
-    // every in-page anchor points at an element that exists
     for (const [, target] of html.matchAll(/href="#([^"]*)"/g)) {
       expect(html).toContain(`id="${target}"`);
     }
   });
 
-  it('turns the CTA into a link once a URL is configured', () => {
-    const configured: Project = {
-      ...project('mini-lang'),
-      visualizerUrl: 'https://example.org/mini-lang-visualizer/',
-      repositoryUrl: 'https://example.org/mini-lang',
-    };
-    const out = renderToStaticMarkup(<ProjectLinks project={configured} />);
-    expect(out).toContain('href="https://example.org/mini-lang-visualizer/"');
-    expect(out).toContain('Execution Visualizer 열기');
-    expect(out).toContain('href="https://example.org/mini-lang"');
-    expect(out).not.toContain('배포 준비 완료');
+  it('falls back to status lines, not links, when a URL is unset', () => {
+    const unpublished: Project = { ...project('mini-lang'), visualizerUrl: null, repositoryUrl: null };
+    const out = renderToStaticMarkup(<ProjectLinks project={unpublished} />);
+    expect(out).not.toContain('<a ');
+    expect(out).toContain('인터랙티브 데모, 배포 준비 완료');
+    expect(out).toContain('아직 공개 전');
   });
 
   it('ignores values that are not absolute http(s) URLs', () => {

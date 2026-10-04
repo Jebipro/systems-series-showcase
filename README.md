@@ -60,18 +60,18 @@ docs/images/              이 Showcase의 캡처
 
 ## 링크 설정 (URL config)
 
-**GitHub 저장소와 데모 URL은 프로젝트를 공개하기 전까지 의도적으로 비워 둡니다.** `src/data/projects.ts`의 각 프로젝트에는 다음 값이 있습니다.
+CTA 링크는 `src/data/projects.ts`의 각 프로젝트 값에서 나옵니다.
 
-```ts
-visualizerUrl: null,   // 예: 'https://<user>.github.io/mini-lang-execution-visualizer/'
-repositoryUrl: null,   // 예: 'https://github.com/<user>/mini-lang'
-```
+| 프로젝트 | `repositoryUrl` | `visualizerUrl` |
+|---|---|---|
+| Mini-Lang | https://github.com/Jebipro/mini-lang | https://jebipro.github.io/mini-lang-execution-visualizer/ |
+| Mini DB | https://github.com/Jebipro/mini-db | https://jebipro.github.io/mini-db-durability-visualizer/ |
 
+- 절대 `http(s)` URL이면 CTA가 새 탭에서 열리는 실제 링크(`… Visualizer 열기 ↗`, `GitHub 저장소 보기 ↗`, `rel="noopener noreferrer"`)가 됩니다.
 - `null`이면 링크 대신 상태 문구("인터랙티브 데모, 배포 준비 완료" / "소스 저장소 · 아직 공개 전")를 보여 줍니다. 임시 링크는 만들지 않습니다.
-- 절대 `http(s)` URL을 넣으면 CTA가 실제 링크(`Execution Visualizer 열기 ↗`, `소스 저장소 ↗`)로 바뀝니다.
 - 그 밖의 값(`'#'`, `'TODO'`, `javascript:` 등)은 `publishedUrl()`이 무시하고 공개 전으로 처리합니다.
 
-두 경우 모두 테스트로 확인합니다.
+세 경우 모두 테스트로 확인합니다.
 
 ## Screenshot 출처
 
@@ -107,10 +107,9 @@ repositoryUrl: null,   // 예: 'https://github.com/<user>/mini-lang'
 ## 한계
 
 - 이 페이지는 프로젝트를 소개할 뿐 실행하지는 않습니다. screenshot은 Visualizer의 정적 캡처입니다.
-- 수치는 `src/data/projects.ts`에 적은 commit 시점의 저장소 기준이며, 자동으로 갱신되지 않습니다.
+- 수치는 각 저장소의 검증 기록을 옮겨 적은 것이며, 자동으로 갱신되지 않습니다.
 - Mini DB의 durability는 시뮬레이션한 파일 시스템 장애 모델과 단일 프로세스 범위에서, Windows에서만 검증했습니다. 실제 전원 차단(power loss)은 테스트하지 않았으며, 페이지에서도 검증 근거 옆에 이 내용을 밝힙니다.
 - 검증 근거가 된 리뷰는 사람이 아니라 AI 에이전트가 수행했습니다. 페이지의 AI 사용 메모에도 적었습니다.
-- 위 URL을 채우기 전까지는 데모와 저장소 링크가 없습니다.
 
 ## 기술 스택
 

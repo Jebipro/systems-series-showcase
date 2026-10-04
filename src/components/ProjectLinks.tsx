@@ -10,7 +10,7 @@ export function ProjectLinks({ project }: { project: Project }) {
   return (
     <div className="project-links">
       {demo ? (
-        <a className="btn btn-primary" href={demo} target="_blank" rel="noopener">
+        <a className="btn btn-primary" href={demo} target="_blank" rel="noopener noreferrer">
           {project.visualizerName} 열기 <span aria-hidden="true">↗</span>
         </a>
       ) : (
@@ -22,8 +22,8 @@ export function ProjectLinks({ project }: { project: Project }) {
         </p>
       )}
       {repo ? (
-        <a className="btn btn-ghost" href={repo} target="_blank" rel="noopener">
-          소스 저장소 <span aria-hidden="true">↗</span>
+        <a className="btn btn-ghost" href={repo} target="_blank" rel="noopener noreferrer">
+          GitHub 저장소 보기 <span aria-hidden="true">↗</span>
         </a>
       ) : (
         <p className="status-line muted" data-status="repo-pending">

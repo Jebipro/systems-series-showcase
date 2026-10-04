@@ -132,8 +132,8 @@ export const PROJECTS: Project[] = [
     ],
     scopeNote:
       'Visualizer는 Mini-Lang의 semantics를 모델로 옮긴 것이며, 고정된 프로그램 2개만 보여 줍니다. token, AST, 출력은 실제 interpreter와 대조해 확인했고, runtime 단계는 직접 작성한 모델입니다.',
-    visualizerUrl: null,
-    repositoryUrl: null,
+    visualizerUrl: 'https://jebipro.github.io/mini-lang-execution-visualizer/',
+    repositoryUrl: 'https://github.com/Jebipro/mini-lang',
   },
   {
     id: 'mini-db',
@@ -205,8 +205,8 @@ export const PROJECTS: Project[] = [
     ],
     scopeNote:
       'Durability는 시뮬레이션한 파일 시스템 장애 모델과 단일 프로세스 범위 안에서 검증했습니다. 실제 전원 차단(power loss) 상황은 테스트하지 않았고, Windows에서만 실행했습니다.',
-    visualizerUrl: null,
-    repositoryUrl: null,
+    visualizerUrl: 'https://jebipro.github.io/mini-db-durability-visualizer/',
+    repositoryUrl: 'https://github.com/Jebipro/mini-db',
   },
 ];
 

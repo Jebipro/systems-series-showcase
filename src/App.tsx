@@ -31,7 +31,7 @@ export function App() {
           <p>
             <span className="mono">Systems Series</span> · Mini-Lang과 Mini DB는 TypeScript로 작성한 교육용 프로젝트입니다.
           </p>
-          <p className="muted">저장소와 데모 링크는 프로젝트를 공개할 때 추가합니다.</p>
+          <p className="muted">코드는 각 GitHub 저장소에서, Visualizer는 GitHub Pages에서 볼 수 있습니다.</p>
         </div>
       </footer>
     </>
